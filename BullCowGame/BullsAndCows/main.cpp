@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include "FBullCowGame.hpp"
 
@@ -8,6 +10,7 @@ void PrintIntro();
 void PlayGame();
 FText GetGuess();
 bool AskToPlayAgain();
+void PringGameSummary();
 
 FBullCowGame BCGame;
 
@@ -69,11 +72,14 @@ FText GetValidGuess()
 void PlayGame()
 {
     int32 MaxTries = BCGame.GetMaxTries();
+    std::cout << MaxTries;
     FText Guess = "";
     
     while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries) {
         Guess = GetValidGuess();
         
+        std::cout << "The try # " << BCGame.GetCurrentTry() << " out of " << MaxTries << std::endl;
+
         FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
         
         std::cout << "Bulls: " << BullCowCount.Bulls;
@@ -81,13 +87,7 @@ void PlayGame()
         std::cout << std::endl;
     }
     
-    if (BCGame.IsGameWon()) {
-        std::cout << "Congratulations you have won!";
-    } else {
-        std::cout << "Sorry you've lost :(((";
-    }
-    
-    std::cout << std::endl;
+    PringGameSummary();
     
     return;
 }
@@ -101,3 +101,17 @@ bool AskToPlayAgain()
     
     return Response[0] == 'y' || Response[0] == 'Y';
 }
+
+void PringGameSummary()
+{
+    if (BCGame.IsGameWon()) {
+        std::cout << "Congratulations you have won!";
+    } else {
+        std::cout << "Sorry you've lost :(((";
+    }
+    
+    std::cout << std::endl;
+    
+    return;
+}
+

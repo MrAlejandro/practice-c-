@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef FBullCowGame_hpp
 #define FBullCowGame_hpp
 
@@ -32,11 +34,10 @@ public:
     int32 GetMaxTries() const;
     int32 GetCurrentTry() const;
     int32 GetHiddenWordLength() const;
-    
     bool IsGameWon() const;
-    EGuessStatus CheckGuessValidity(FString);
     
     void Reset();
+    EGuessStatus CheckGuessValidity(FString);
     FBullCowCount SubmitGuess(FString);
 
 private:
@@ -44,4 +45,6 @@ private:
     int32 MyMaxTries;
     FString MyHiddenWord;
     bool bIsGameWon;
+    bool IsIsogram(FString) const;
+    bool IsLowercase(FString) const;
 };
